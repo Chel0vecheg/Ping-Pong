@@ -33,24 +33,26 @@ class GameSprite(sprite.Sprite):
 class Player(GameSprite):
     def update_l(self):
         keys = key.get_pressed()
-        if keys[K_a] and self.rect.x > 5:
-            self.rect.x -= self.speed
-        if keys[K_d] and self.rect.x < win_width - 80:
-            self.rect.x += self.speed
+        if keys[K_w] and self.rect.y > 5:
+            self.rect.y -= self.speed
+        if keys[K_s] and self.rect.y < win_height - 70:
+            self.rect.y += self.speed
     def update_r(self):
         keys = key.get_pressed()
-        if keys[K_UP] and self.rect.x > 5:
-            self.rect.x -= self.speed
-        if keys[K_DOWN] and self.rect.x < win_width - 80:
-            self.rect.x += self.speed
+        if keys[K_UP] and self.rect.y > 5:
+            self.rect.y -= self.speed
+        if keys[K_DOWN] and self.rect.y < win_width - 70:
+            self.rect.y += self.speed
 #!
+
+ball = GameSprite('PingPongBall.png',150,150,50,50,0)
 
 win_width = 700
 win_height = 500
 display.set_caption("Ping Pong")
 window = display.set_mode((win_width, win_height))
 #//background = transform.scale(image.load(img_back), (win_width, win_height))
-background = (0,125,125)
+background = (100, 149, 237)
 clock = time.Clock()
 
 finish = False
@@ -63,5 +65,6 @@ while run:
 
     if not finish:
         window.fill(background)
+        ball.reset()
         display.update()
     clock.tick(60)
