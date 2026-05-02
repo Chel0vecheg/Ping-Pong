@@ -1,11 +1,14 @@
 from pygame import *
 from random import randint
 
+bounces = 0
+
 font.init()
 font1 = font.SysFont('Arial', 40)
 player1_win = font1.render('Player1 WON!', True, (0, 0, 0))
 player2_win = font1.render('Player2 WON!', True, (0, 0, 0))
-
+font2 = font.SysFont('Arial', 30)
+bounces_text = font2.render('Bounces:' + str(bounces), True,(0,0,0))
 
 #! 
 #* 
@@ -79,6 +82,8 @@ while run:
 
     if not finish:
         window.fill(background)
+        bounces_text = font2.render('Bounces:' + str(bounces), True,(0,0,0))
+        window.blit(bounces_text,(260,50))
         P1.reset()
         P1.update_l()
         P2.reset()
@@ -86,6 +91,7 @@ while run:
         ball.reset()
         ball.move()
         if sprite.collide_rect(ball, P2) or sprite.collide_rect(ball, P1):
+            bounces += 1
             ball.speed_x *= -1
             random = randint(1,2)
             if random == 1:
